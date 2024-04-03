@@ -22,8 +22,8 @@ export async function decrypt(input:string) : Promise<any> {
 
 export async function login(formData:FormData) {
     //Verify credentials and get the user
-    if(formData.get("email") === "briannesiemsen@gmail.com" && formData.get("password") === "test") {
-        const user = {email: formData.get("email"), password: formData.get("password"), name: "Bree"}
+    if(formData.get("username") === process.env.NAME && formData.get("password") === process.env.PASSWORD) {
+        const user = {username: formData.get("username"), password: formData.get("password"), name: "Bree"}
 
         //create the session
         const expires = new Date(Date.now() + 60 * 1000);
