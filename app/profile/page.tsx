@@ -8,19 +8,19 @@ export default async function Home() {
     redirect("/login")
   }
   return (
-    <div>
-        <section>
-          <Link href="/">Home</Link>
-          <Link href="./login">Login</Link>
-        </section>
+    <div className="text-center">
+        <h1 className="text-9xl m-8">Profile Page</h1>
         <p>{session.user.name}</p>
         <p>{session.user.username}</p>
+        <div className="buttons">
+          <Link href="/">Go Home</Link>
+        </div>
         <form action={async (formData) => {
           "use server"
           await logout();
           redirect("/")
         }}>
-          <button type="submit">Logout</button>
+          <button type="submit" className="buttons">Logout</button>
         </form>
     </div>
   )
