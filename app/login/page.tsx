@@ -1,11 +1,15 @@
 import {redirect} from "next/navigation";
-import {getSession, login, logout} from "../lib";
+import {getSession, login} from "../lib";
 import Link from "next/link";
 
 export default async function Home() {
+  const session = await getSession();
+  if(session != null) {
+    redirect("/profile")
+  }
   return (
-    <section className="text-center flex flex-col justify-center h-screen items-center">
-      <h1 className="text-9xl m-8">Login Page</h1>
+    <section className="text-center flex flex-col justify-center min-h-screen items-center">
+      <h1 className="text-8xl m-8 lg:text-9xl">Login Page</h1>
       <form action={async (formData) => {
         "use server"
         let success = await login(formData);
