@@ -2,7 +2,6 @@ import {redirect} from "next/navigation";
 import {getSession, logout} from "../lib";
 import {data} from "../data.js";
 import Link from "next/link";
-import { Vidaloka } from "next/font/google";
 
 export default async function Home() {
   const session = await getSession();

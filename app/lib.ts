@@ -46,7 +46,7 @@ export async function login(formData:FormData) {
 export async function signup(formData:FormData) {
     let found = false;
     data.forEach((item) => {
-        if(formData.get("username") === item.username && formData.get("password") === item.password) {
+        if(formData.get("username") === item.username) {
             found = true;
         }
     })
