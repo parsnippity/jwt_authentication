@@ -1,29 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# JWT Authentication
 
-First, run the development server:
+This project demonstrates how JWTs can be used for authentication with Next.js. When the user signs in, a session is created and saved in a cookie. The expiration date on the session is then refreshed on every request, through a custom middleware. When they click the sign out button, the session is destroyed.
+
+The JWT session stores the username and password, which is used on the profile page to look up the user. If the session does not exist, the user is not allowed to access the profile page, and is instead redirected to the login page.
+
+The most current, complete version of this project lives in the branch called partThree. No .env file is required for the project to run, unlike in the earlier branches. Instead, the data.js file exists, which is written to through the code to allow for user profiles to be edited and created.
+## Authors
+
+- [@parsnippity](https://www.github.com/parsnippity)  
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/parsnippity/jwt_authentication/tree/partThree
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Environmental Variables
-
-For this project to work, you need an environmental variable file. This will be located in the root jwt_authentication folder and named .env.local, and must contain a username, password, and secret, e.g.:
-
+```bash
+  cd jwt_authentication
 ```
-SECRET = "secret"
-NAME = "name"
-PASSWORD = "password"
+
+Install dependencies
+
+```bash
+  npm install
 ```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
