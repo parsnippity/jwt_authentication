@@ -10,13 +10,15 @@ export default async function Home() {
     redirect("/login")
   }
   function findIt() {
-    let val = {username: "", password: "", email: "", name: "", job: "", age: 0, quote: "", bio: ""};
+    let val = {username: "", password: "", email: "", name: "", job: "", age: 0, quote: "", bio: "", image: "default"};
     data.forEach((item) => {
       if(session.user.username === item.username && session.user.password === item.password) {
         val = item;
       }
     })
-    return <div className="lg:w-6/12 text-center lg:text-left">
+    return <>
+          <img src={val.image == "default" ? "./images/pexels-wojciech-kumpicki-2071873.jpg" : val.image} className="w-6/12 lg:w-4/12 h-fit"/>
+          <div className="lg:w-6/12 text-center lg:text-left">
             <div className="m-3">
               <p className="text-4xl">{val.name.length > 0 ? val.name : "There is no name"}</p>
               <p className="text-xl">{val.job.length > 0 ? val.job : "There is no job"}, {val.age > 0 ? val.age : "There is no age"}</p>
@@ -28,12 +30,12 @@ export default async function Home() {
               <p className="text-xl">{val.bio.length > 0 ? val.bio : "There is no bio"}</p>
             </div>
           </div>
+          </>
   }
   return (
     <div className="text-center flex flex-col justify-center min-h-screen items-center">
         <h1 className="text-8xl m-8 lg:text-9xl">Profile Page</h1>
         <div className="flex justify-center items-center w-9/12 flex-col lg:flex-row">
-          <img src="./images/pexels-wojciech-kumpicki-2071873.jpg" className="w-6/12 lg:w-4/12 h-fit"/>
           {findIt()}
         </div>
         <div>

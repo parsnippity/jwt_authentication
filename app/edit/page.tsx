@@ -11,7 +11,7 @@ export default async function Home() {
     redirect("/login")
   }
   function findIt() {
-    let val = {username: "", password: "", email: "", name: "", job: "", age: 0, quote: "", bio: ""};
+    let val = {username: "", password: "", email: "", name: "", job: "", age: 0, quote: "", bio: "", image: ""};
     data.forEach((item) => {
       if(session.user.username === item.username && session.user.password === item.password) {
         val = item;
@@ -21,7 +21,7 @@ export default async function Home() {
         "use server"
           let extra = data.map((item) => {
             if(session.user.username === item.username) {
-              return {username: session.user.username, password: session.user.password, email: e.get("email"), name: e.get("name"), job: e.get("job"), age: Number(e.get("age")), quote: e.get("quote"), bio: e.get("bio")}
+              return {username: session.user.username, password: session.user.password, email: e.get("email"), name: e.get("name"), job: e.get("job"), age: Number(e.get("age")), quote: e.get("quote"), bio: e.get("bio"), image: e.get("image") || "default"}
             } else return item;
           })
           writeFileSync("./app/data.js", "export const data =" + JSON.stringify(extra))
@@ -31,6 +31,8 @@ export default async function Home() {
         <input id="name" type="text" name="name" defaultValue={val.name}></input>
         <label htmlFor="email">Email:</label>
         <input id="email" type="email" name="email" defaultValue={val.email}></input>
+        <label htmlFor="image">Profile Picture Link:</label>
+        <input id="image" type="text" name="image" defaultValue={val.image == "default" ? "" : val.image}></input>
         <label htmlFor="job">Job:</label>
         <input id="job"  type="text" name="job" defaultValue={val.job}></input>
         <label htmlFor="age">Age:</label>

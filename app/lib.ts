@@ -61,7 +61,8 @@ export async function signup(formData:FormData) {
             job: "",
             age: 0,
             quote: "",
-            bio: ""
+            bio: "",
+            image: "default"
         }]
         
         writeFileSync("./app/data.js", "export const data =" + JSON.stringify(extra))
