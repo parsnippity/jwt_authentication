@@ -58,8 +58,8 @@ export async function signup(formData:FormData) {
             password: formData.get("password"),
             email: "",
             name: "",
-            age: 0,
             job: "",
+            age: 0,
             quote: "",
             bio: ""
         }]

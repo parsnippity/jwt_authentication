@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { getSession, logout } from "./lib";
-// get the error messages working
-// get the edit page working (it doesn't write)
 
 export default async function Home() {
   const session = await getSession();

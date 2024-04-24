@@ -10,7 +10,7 @@ export default async function Home() {
     redirect("/login")
   }
   function findIt() {
-    let val = {username: "", password: "", name: "", job: "", age: 0, quote: "", bio: ""};
+    let val = {username: "", password: "", email: "", name: "", job: "", age: 0, quote: "", bio: ""};
     data.forEach((item) => {
       if(session.user.username === item.username && session.user.password === item.password) {
         val = item;
@@ -20,6 +20,7 @@ export default async function Home() {
             <div className="m-3">
               <p className="text-4xl">{val.name.length > 0 ? val.name : "There is no name"}</p>
               <p className="text-xl">{val.job.length > 0 ? val.job : "There is no job"}, {val.age > 0 ? val.age : "There is no age"}</p>
+              <p className="text-xl">{val.email.length > 0 ? val.email : "There is no email"}</p>
               <p className="text-xl">{session.user.username}</p>
             </div>
             <div className="m-3">

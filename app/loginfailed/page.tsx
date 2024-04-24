@@ -30,6 +30,7 @@ export default async function Home() {
           <Link href="/signup" className="m-8">Sign Up Page</Link>
           <button type="submit" className="m-8">Login</button>
         </div>
+        <h1 className="text-red-500 text-2xl">Username or password is incorrect</h1>
       </form>
     </section>
   )

@@ -2,50 +2,43 @@ import {redirect} from "next/navigation";
 import {getSession, logout} from "../lib";
 import {data} from "../data.js";
 import Link from "next/link";
-import { useRef } from "react";
+import { writeFileSync } from "fs";
 
 export default async function Home() {
   const session = await getSession();
-  // const name = useRef(null)
-  // const job = useRef(null)
-  // const age = useRef(null)
-  // const quote = useRef(null)
-  // const bio = useRef(null)
+
   if(session === null) {
     redirect("/login")
   }
   function findIt() {
-    let val = {username: "", password: "", name: "", job: "", age: 0, quote: "", bio: ""};
+    let val = {username: "", password: "", email: "", name: "", job: "", age: 0, quote: "", bio: ""};
     data.forEach((item) => {
       if(session.user.username === item.username && session.user.password === item.password) {
         val = item;
       }
     })
-    return <form className="flex justify-center items-center w-9/12 flex-col" action={async (formData) => {
+    return <form className="flex justify-center items-center w-9/12 flex-col" action={async (e) => {
         "use server"
-        console.log("-----------------------------------------")
-        console.log(formData.entries())
-        for (const pair of formData.entries()) {
-          console.log(pair[0], pair[1]);
-        }
-        console.log("-----------------------------------------")
-          data.map((item) => {
+          let extra = data.map((item) => {
             if(session.user.username === item.username) {
-              return {username: session.user.username, password: session.user.password, name: document.getElementById("name"), job: document.getElementById("job"), age: document.getElementById("age"), quote: document.getElementById("quote"), bio: document.getElementById("bio")}
-            }
+              return {username: session.user.username, password: session.user.password, email: e.get("email"), name: e.get("name"), job: e.get("job"), age: Number(e.get("age")), quote: e.get("quote"), bio: e.get("bio")}
+            } else return item;
           })
+          writeFileSync("./app/data.js", "export const data =" + JSON.stringify(extra))
           redirect("/profile")
       }}>
         <label htmlFor="name">Name:</label>
-        <input id="name" type="text" defaultValue={val.name}></input>
+        <input id="name" type="text" name="name" defaultValue={val.name}></input>
+        <label htmlFor="email">Email:</label>
+        <input id="email" type="email" name="email" defaultValue={val.email}></input>
         <label htmlFor="job">Job:</label>
-        <input id="job"  type="text" defaultValue={val.job}></input>
+        <input id="job"  type="text" name="job" defaultValue={val.job}></input>
         <label htmlFor="age">Age:</label>
-        <input id="age" type="number" defaultValue={val.age}></input>
+        <input id="age" type="number" name="age" defaultValue={val.age}></input>
         <label htmlFor="quote">Quote:</label>
-        <input id="quote" type="text" defaultValue={val.quote}></input>
+        <input id="quote" type="text" name="quote" defaultValue={val.quote}></input>
         <label htmlFor="bio">Bio:</label>
-        <input id="bio" type="text" defaultValue={val.bio}></input>
+        <textarea id="bio" name="bio" defaultValue={val.bio}></textarea>
         <button type="submit" className="buttons">Edit</button>
     </form>
   }

@@ -16,7 +16,7 @@ export default async function Home() {
         let success = await signup(formData);
         if(success) {
             redirect("/")
-        } else console.log("That username is already taken")
+        } else redirect("/signupfailed")
       }} className="flex flex-col">
         <div>
           <label htmlFor="username" className="buttons">Username:</label>
@@ -27,8 +27,8 @@ export default async function Home() {
           <input type="password" name="password" id="password" className="align-bottom mx-2 p-2"/>
         </div>
         <div className="buttons">
-          <Link href="/" className="m-8">Go Home</Link>
-          <Link href="/login" className="m-8">Login</Link>
+          <Link href="/" className="m-8">Home Page</Link>
+          <Link href="/login" className="m-8">Login Page</Link>
           <button type="submit" className="m-8">Sign up</button>
         </div>
       </form>
